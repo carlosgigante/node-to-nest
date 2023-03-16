@@ -1,13 +1,16 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException, InternalServerErrorException, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { Repository } from 'typeorm';
+
 import { User } from 'src/user/entities/user.entity';
 import { loginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from '../../dist/auth/interfaces/jwt-payload.interface';
+import { JwtPayload } from './interfaces/';
+import { UserService } from 'src/user/user.service';
+import { CreateUserDto } from '../user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,8 +18,14 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
     private readonly jwtService: JwtService
   ){}
+
+  async create(createUserDto: CreateUserDto){
+    return this.userService.create(createUserDto)
+  }
 
   async login(loginDto: loginDto){
     const { email, password } = loginDto;
@@ -31,12 +40,27 @@ export class AuthService {
       throw new UnauthorizedException('Credentials are not valid (password)');
     return {
       ...user,
-      
+      token: this.getJwtToken({id: user.id})
+    };
+  }
+
+  async checkAuthStatus(user: User){
+    return{
+      ...user,
+      token: this.getJwtToken({id: user.id})
     }
   }
 
-  private getJwtToken(payload: JwtPayload){
+  public getJwtToken(payload: JwtPayload){
     const token = this.jwtService.sign(payload);
     return token;
+  }
+
+
+  public handleDbErrors(error: any): never{
+    if(error.cod === '23505')
+      throw new BadRequestException(error.detail);
+    console.log(error);
+    throw new InternalServerErrorException('Please check server logs');
   }
 }
