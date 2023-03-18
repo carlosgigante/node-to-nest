@@ -49,7 +49,7 @@ export class User {
 
     @OneToMany(
         () => Item,
-        (item) => item.user
+        (item) => item.createdBy
     )
     item: string;
 

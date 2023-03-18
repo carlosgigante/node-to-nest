@@ -20,6 +20,8 @@ export class Item {
         (user) => user.item,
         { eager: true }
     )
-    user: User
+    createdBy: User
+
+    
 
 }
