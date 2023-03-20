@@ -18,7 +18,7 @@ export class Item {
     @ManyToOne(
         () => User,
         (user) => user.item,
-        { eager: true }
+        { eager: true, onDelete: 'CASCADE' }
     )
     createdBy: User
 

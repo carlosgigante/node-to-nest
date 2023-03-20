@@ -1,6 +1,8 @@
-import { IsEmail, IsString, Matches, MaxLength, MinLength, IsIn, IsDateString, IsNotEmpty } from "class-validator";
+import { Type } from "class-transformer";
+import { IsEmail, IsString, Matches, MaxLength, MinLength, IsIn, IsDateString, IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateUserDto {
+
 
     @IsString()
     @MinLength(3)
@@ -35,5 +37,16 @@ export class CreateUserDto {
         'man', 'woman', 'prefer not to say'
     ])
     gender: string;
+
+    @IsOptional()
+    @Type(() => Boolean)
+    
+    enable?: boolean;
+
+    @IsOptional()
+    @Type(() => Boolean)
+    verify?: boolean;
+
+    
 
 }

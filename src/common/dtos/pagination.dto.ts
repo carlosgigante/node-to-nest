@@ -13,4 +13,13 @@ export class PaginationDto{
     @Min(0)
     @Type(() => Number)
     offset?: number;
+
+    @IsOptional()
+    @Type(() => Boolean)
+    
+    enable?: boolean;
+
+    @IsOptional()
+    @Type(() => Boolean)
+    verify?: boolean;
 }

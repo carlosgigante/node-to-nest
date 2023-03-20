@@ -44,11 +44,14 @@ export class AuthService {
     };
   }
 
-  async checkAuthStatus(user: User){
-    return{
-      ...user,
-      token: this.getJwtToken({id: user.id})
-    }
+  async findMe(user: User) {
+    const { id } = user;
+
+    return this.userService.findOne(id);
+  }
+
+  async refreshToken(user: User){
+    return{ token: this.getJwtToken({id: user.id}) }
   }
 
   public getJwtToken(payload: JwtPayload){
