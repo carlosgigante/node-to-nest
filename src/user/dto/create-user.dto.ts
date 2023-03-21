@@ -29,6 +29,12 @@ export class CreateUserDto {
     })
     password: string;
 
+    @IsString()
+    @IsOptional()
+    @MinLength(6)
+    @MaxLength(50)
+    passwordConfirmation?: string;
+
     @IsDateString()
     @IsNotEmpty()
     birthday: Date;

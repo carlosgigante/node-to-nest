@@ -1,0 +1,654 @@
+{
+	"info": {
+		"_postman_id": "57e5a993-041a-4a9d-abd7-9caa92eb4453",
+		"name": "node-to-nest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23716457"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add one user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"test02\",\r\n    \"firstName\": \"Jhon\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"roxnny.bsdssd.a.rrios2@gmail.com\",\r\n    \"password\": \"Cc227567\",\r\n    \"passwordConfirmation\": \"Cc227567\",\r\n    \"birthday\": \"1994-12-23\",\r\n    \"gender\": \"man\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTIzNzQ0NywiZXhwIjoxNjc5MjQ0NjQ3fQ.-_KKP8PJMPRMpNTUFDtaXSe8AnPuJLcaZR9tW-eXBlM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/user?limit=10&offset=0&enable=false&verify=false",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "enable",
+									"value": "false"
+								},
+								{
+									"key": "verify",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an user by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTIzNzQ0NywiZXhwIjoxNjc5MjQ0NjQ3fQ.-_KKP8PJMPRMpNTUFDtaXSe8AnPuJLcaZR9tW-eXBlM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/bb56f19f-bf3e-4b0c-8ac7-1c2df6d07112",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"bb56f19f-bf3e-4b0c-8ac7-1c2df6d07112"
+							],
+							"query": [
+								{
+									"key": "enable",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "verify",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an user by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTI0MDY1NSwiZXhwIjoxNjc5MjQ3ODU1fQ.SUflssr5eRjztjHygCWQpbjeqUtJ28_pNLPV7is2EKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"test0ss23\",\r\n    \"firstName\": \"Jhossn\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"roxnny.b.a.rrios23@gmail.com\",\r\n    \"birthday\": \"1990-02-27\",\r\n    \"gender\": \"man\",\r\n    \"enable\": true,\r\n    \"verify\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/bb56f19f-bf3e-4b0c-8ac7-1c2df6d07112",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"bb56f19f-bf3e-4b0c-8ac7-1c2df6d07112"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTI0MDY1NSwiZXhwIjoxNjc5MjQ3ODU1fQ.SUflssr5eRjztjHygCWQpbjeqUtJ28_pNLPV7is2EKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/c3301b2d-e4c1-487a-9e62-d7ea3cd27768",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"c3301b2d-e4c1-487a-9e62-d7ea3cd27768"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"roxnny.b.a.rrios2@gmail.com\",\r\n    \"password\": \"Cc123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"test02\",\r\n\t\"firstName\": \"Jhon\",\r\n\t\"lastName\": \"Doe\",\r\n\t\"email\": \"roxnny.b.a.rrios2@gmail.com\",\r\n\t\"password\": \"Cc123456\",\r\n    \"passwordConfirmation\": \"Cc123456\",\r\n    \"birthday\": \"1990-02-27\",\r\n    \"gender\": \"man\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4MjMzNmVhLTNlZDQtNGFmNi1hNDRkLTc3NGNlMjYzOWRjNyIsImlhdCI6MTY3OTI0MzA5NSwiZXhwIjoxNjc5MjUwMjk1fQ.EdNrHVTWgqbEo2VaktALTiSGdcqdcesfv-MhfE5xxKs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/refresh-token",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get actual user information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdhYTc2MDk3LTVmNWEtNDhiYi1iN2Y2LTI5ODg5NWMwZWE0OCIsImlhdCI6MTY3OTM0Mzg0OSwiZXhwIjoxNjc5MzUxMDQ5fQ.nF33CZj-9V7TJdUaXieU1vOz6vd2eQpJDfMEz9N2gMs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/auth/me",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change my password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMGVjODQxLWUyNmQtNDUxYy1hOGE1LTI5ODRlOWE0ODE1OSIsImlhdCI6MTY3OTQwODQ2NywiZXhwIjoxNjc5NDE1NjY3fQ.nxLBCgg__A6P-M_pK996lZ45XuAmyovqGa3br1UT9YQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"Cc123456\",\r\n    \"password\": \"Cc654321\",\r\n    \"passwordConfirmation\": \"Cc654321\"\r\n}5",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/change-my-password",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"change-my-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Act current user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMGVjODQxLWUyNmQtNDUxYy1hOGE1LTI5ODRlOWE0ODE1OSIsImlhdCI6MTY3OTQwODQ2NywiZXhwIjoxNjc5NDE1NjY3fQ.nxLBCgg__A6P-M_pK996lZ45XuAmyovqGa3br1UT9YQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Roxnny\",\r\n    \"lastName\": \"Barrios\",\r\n    \"email\": \"roxnny.barrios@gmail.com\",\r\n    \"birthday\": \"1998-01-27\",\r\n    \"gender\": \"man\",\r\n    \"userName\": \"rbarrios\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/me",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Add one item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTE1MTI5NCwiZXhwIjoxNjc5MTU4NDk0fQ.y7z2I6P2xhYBbqiLEirj9lKO6ScET8O7bA82Ij9Vh3s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nice tshirt\",\r\n    \"description\": \"A very nice tshirt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/items",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/items/?limit=5&offset=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"items",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List one item By",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/items/5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"items",
+								"5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update item by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTE1NzY4MSwiZXhwIjoxNjc5MTY0ODgxfQ.gisYDrbIpFTOhRfP8kE-Iy7QsSr782Gs7Zp8-xxCFwc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"paso loco\",\r\n    \"description\": \"qlq\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/items/5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"items",
+								"5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete item by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiNTZmMTlmLWJmM2UtNGIwYy04YWM3LTFjMmRmNmQwNzExMiIsImlhdCI6MTY3OTE1NzY4MSwiZXhwIjoxNjc5MTY0ODgxfQ.gisYDrbIpFTOhRfP8kE-Iy7QsSr782Gs7Zp8-xxCFwc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"paso loco\",\r\n    \"description\": \"qlq\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/items/5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"items",
+								"5d2aa8e0-df6c-4ccc-9d91-d0488da93f6d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

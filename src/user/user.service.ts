@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, forwardRef, Inject, NotFoundException, Logger, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, BadRequestException, forwardRef, Inject, NotFoundException, Logger, InternalServerErrorException, NotAcceptableException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthService } from '../auth/auth.service';
 import { isUUID } from 'class-validator';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { ChangePasswordDto } from 'src/auth/dto';
 
 @Injectable()
 export class UserService {
@@ -23,13 +24,16 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto){
 
-    try{
-      const { password, ...userData } = createUserDto;
-      const user = this.userRepository.create({
-        ...userData,
-        password: bcrypt.hashSync(password, 10)
-      });
+    
+    const { password, ...userData } = createUserDto;
+    const user = this.userRepository.create({
+      ...userData,
+      password: bcrypt.hashSync(password, 10)  
+    });
 
+    if(!bcrypt.compareSync(userData.passwordConfirmation, user.password))
+      throw new UnauthorizedException('The passwords must be exactly the same');
+    try{
       await this.userRepository.save(user);
       delete user.password;
       return {
@@ -49,6 +53,7 @@ export class UserService {
     const user = await this.userRepository.find({
       take: limit,
       skip: offset,
+      
       where:{
         enable: enable,
         verify: verify
@@ -79,8 +84,27 @@ export class UserService {
       if(!user)
         throw new NotFoundException(`user with id #${id} not found`);
       await this.userRepository.update(id, updateUserDto)
-      return "hola"
+      return updateUserDto;
     } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
+
+
+  async updatePassword(user: User, changePasswordDto: ChangePasswordDto){
+    
+    try{
+      if(!user)
+        throw new NotFoundException('user not found, check server logs');
+      const queryBuilder = this.userRepository.createQueryBuilder('users');
+       await queryBuilder
+      .update(User)
+      .set({password: bcrypt.hashSync(changePasswordDto.password, 10)})
+      .where("id = :id", { id: user.id })
+      .execute();
+
+      return user;
+    }catch(error){
       this.handleDBExceptions(error);
     }
   }

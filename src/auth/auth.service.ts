@@ -4,13 +4,14 @@ import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 
 import { User } from 'src/user/entities/user.entity';
-import { loginDto } from './dto/login.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { loginDto } from './dto';
 
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './interfaces/';
 import { UserService } from 'src/user/user.service';
 import { CreateUserDto } from '../user/dto/create-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -44,10 +45,25 @@ export class AuthService {
     };
   }
 
-  async findMe(user: User) {
-    const { id } = user;
+  async updateMe(user: User, updateUserDto: UpdateUserDto){
+    const { id } = user
+    return this.userService.update(id, updateUserDto);
+  }
 
-    return this.userService.findOne(id);
+  async findMe(user: User) {
+    return user;
+  }
+
+  async changeMyPassword(user: User,changePasswordDto: ChangePasswordDto){
+
+    const { password } = user;
+    const { currentPassword, passwordConfirmation } = changePasswordDto;
+
+    if(!bcrypt.compareSync(currentPassword, password))
+      throw new UnauthorizedException('Credentials are not valid (password)');
+    if(changePasswordDto.password != passwordConfirmation)
+      throw new UnauthorizedException('The passwords must be exactly the same');
+    return this.userService.updatePassword(user, changePasswordDto);
   }
 
   async refreshToken(user: User){
