@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { ItemModule } from './item/item.module';
+
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { ItemModule } from './modules/item/item.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
 
@@ -26,8 +25,6 @@ import { CommonModule } from './common/common.module';
     ItemModule,
     CommonModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
   
 })
 export class AppModule {}
