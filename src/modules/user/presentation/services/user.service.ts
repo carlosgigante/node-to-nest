@@ -128,7 +128,7 @@ export class UserService {
     return { user }
   }
 
-  private handleDBExceptions(error: any){
+  public handleDBExceptions(error: any){
     if(error.code === '23505')
       throw new BadRequestException(error.detail);
     this.logger.error(error)

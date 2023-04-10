@@ -1,15 +1,21 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe } from '@nestjs/common';
-import { ItemService } from '../../presentation/services/item.service';
 import { CreateItemDto } from '../../presentation/dtos/create-item.dto';
 import { UpdateItemDto } from '../../presentation/dtos/update-item.dto';
 import { User } from 'src/modules/user/domain/entities/user.entity';
 import { Auth, GetUser } from 'src/modules/auth/domain/decorators';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { ValidRoles } from 'src/modules/auth/domain/interfaces';
+import { GetItemUseCase, ListItemsUseCase, SaveItemUseCase, UpdateItemUseCase } from '../../presentation/useCases';
 
 @Controller('user')
 export class ItemController {
-  constructor(private readonly itemService: ItemService) {}
+  constructor(
+    private readonly saveItemUseCase: SaveItemUseCase,
+    private readonly updateItemUseCase: UpdateItemUseCase,
+    private readonly listItemsUseCase: ListItemsUseCase,
+    private readonly getItemUseCase: GetItemUseCase
+
+  ) {}
 
   @Post('items')
   @Auth()
@@ -17,7 +23,7 @@ export class ItemController {
     @Body() createItemDto: CreateItemDto,
     @GetUser() user: User
   ){
-    return this.itemService.create(createItemDto, user)
+    return this.saveItemUseCase.handle(createItemDto, user);
   }
 
   @Patch('items/:id')
@@ -27,25 +33,25 @@ export class ItemController {
     @Body() updateItemDto: UpdateItemDto,
     @GetUser() user: User
   ){
-    return this.itemService.update(id, updateItemDto, user);
+    return this.updateItemUseCase.handle(id, updateItemDto, user);
   }
 
 
   @Get('items')
   findAll(@Query() paginationDto: PaginationDto) {
-    return this.itemService.findAll(paginationDto);
+    return this.listItemsUseCase.handle(paginationDto);
   }
 
 
   @Get('items/:term')
   findeOne(@Param('term') term: string) {
-    return this.itemService.findOnePlain(term);
+    return this.getItemUseCase.handle(term);
   }
 
-  @Delete('items/:id')
-  @Auth(ValidRoles.superUser)
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.itemService.remove(id);
-  }
+  // @Delete('items/:id')
+  // @Auth(ValidRoles.superUser)
+  // remove(@Param('id', ParseUUIDPipe) id: string) {
+  //   return this.itemService.remove(id);
+  // }
   
 }
